@@ -255,30 +255,30 @@ function motion(grid, priorProb, movingActn) {
               // If it's an obstacle, we can move left from the current square
               //  with 75% probability and bounce back
               if (!isUnBlocked(grid, i, j - 1))
-                westTransitionProb = 0.75 * priorProb[i][j];
+                westTransitionProb = 0.75 * Number(priorProb[i][j]);
             }
             // not a valid west cell, so acts as an obstacle
-            else westTransitionProb = 0.75 * priorProb[i][j];
+            else westTransitionProb = 0.75 * Number(priorProb[i][j]);
 
             //  ------- NORTH ---------
             if (isValid(i - 1, j)) {
               if (isUnBlocked(grid, i - 1, j))
                 // valid unblocked north cell, so we can move left from that cell with 15% probability
                 // to the current cell
-                northTransitionProb = 0.15 * priorProb[i - 1][j];
+                northTransitionProb = 0.15 * Number(priorProb[i - 1][j]);
               // valid blocked cell, we can move right from the current cell with 10% probability and
               //  bounce back to current square
-              else northTransitionProb = 0.1 * priorProb[i][j];
+              else northTransitionProb = 0.1 * Number(priorProb[i][j]);
             }
             // Not a valid north cell, acts as an obstacle from the north
-            else northTransitionProb = 0.1 * priorProb[i][j];
+            else northTransitionProb = 0.1 * Number(priorProb[i][j]);
 
             //  ------- EAST -------
             if (isValid(i, j + 1)) {
               //  valid unblocked east cell, so we can move straight from that cell
               //  with 75% probability to the current cell
               if (isUnBlocked(grid, i, j + 1))
-                eastTransitionProb = 0.75 * priorProb[i][j + 1];
+                eastTransitionProb = 0.75 * Number(priorProb[i][j + 1]);
             }
 
             //  -------- SOUTH -------
@@ -286,13 +286,13 @@ function motion(grid, priorProb, movingActn) {
               if (isUnBlocked(grid, i + 1, j))
                 // Valid unblocked south cell, so we can move right with 10% probability from that cell
                 // and reach the current cell
-                southTransitionProb = 0.1 * priorProb[i + 1][j];
+                southTransitionProb = 0.1 * Number(priorProb[i + 1][j]);
               // Valid blocked south cell, we can move left from the current cell with 15% probability
               // and bounce back
-              else southTransitionProb = 0.15 * priorProb[i][j];
+              else southTransitionProb = 0.15 * Number(priorProb[i][j]);
             }
             // Not a valid south cell, acts as an obstacle
-            else southTransitionProb = 0.15 * priorProb[i][j];
+            else southTransitionProb = 0.15 * Number(priorProb[i][j]);
 
             break;
           case "N":
@@ -304,40 +304,40 @@ function motion(grid, priorProb, movingActn) {
               // Valid unlocked cell to the left, we can move from that cell right with 10% probability
               // and end up in the current cell.
               if (isUnBlocked(grid, i, j - 1))
-                westTransitionProb = 0.1 * priorProb[i][j - 1];
+                westTransitionProb = 0.1 * Number(priorProb[i][j - 1]);
               // Valid blocked cell to the left, we can move west from current cell with 15% probability and bounce back
-              else westTransitionProb = 0.15 * priorProb[i][j];
+              else westTransitionProb = 0.15 * Number(priorProb[i][j]);
             }
             // Not valid to the left, acts as an obstacle
-            else westTransitionProb = 0.15 * priorProb[i][j];
+            else westTransitionProb = 0.15 * Number(priorProb[i][j]);
 
             // ------ NORTH -----
             if (isValid(i - 1, j)) {
               // Valid blocked cell to the north, we can move north from current cell with
               // 75% probability and bounce back
               if (!isUnBlocked(grid, i - 1, j))
-                northTransitionProb = 0.75 * priorProb[i][j];
+                northTransitionProb = 0.75 * Number(priorProb[i][j]);
               // Valid unblocked cell to the north, ignore it
             }
             // not a valid square from the north, acts as an obstacle
-            else northTransitionProb = 0.75 * priorProb[i][j];
+            else northTransitionProb = 0.75 * Number(priorProb[i][j]);
 
             // ------ EAST ------
             if (isValid(i, j + 1)) {
               // Valid unblocked cell east, we can move left from there with 15% probability to the current cell
               if (isUnBlocked(grid, i, j + 1))
-                eastTransitionProb = 0.15 * priorProb[i][j + 1];
+                eastTransitionProb = 0.15 * Number(priorProb[i][j + 1]);
               // Valid blocked cell east, we can move right with 10% probability and bounce back
-              else eastTransitionProb = 0.1 * priorProb[i][j];
+              else eastTransitionProb = 0.1 * Number(priorProb[i][j]);
             }
             // not valid cell east, acts as an obstacle
-            else eastTransitionProb = 0.1 * priorProb[i][j];
+            else eastTransitionProb = 0.1 * Number(priorProb[i][j]);
 
             // ----- SOUTH -----
             if (isValid(i + 1, j)) {
               // valid unblocked from the south, move straight with 75% probability to end up in current cell
               if (isUnBlocked(grid, i + 1, j))
-                southTransitionProb = 0.75 * priorProb[i + 1][j];
+                southTransitionProb = 0.75 * Number(priorProb[i + 1][j]);
               // blocked, ignore it
             }
             // not valid, also ignore it
@@ -350,7 +350,7 @@ function motion(grid, priorProb, movingActn) {
             if (isValid(i, j - 1)) {
               // Open square west, we can move with 75% probability east to the current cell
               if (isUnBlocked(grid, i, j - 1))
-                westTransitionProb = 0.75 * priorProb[i][j - 1];
+                westTransitionProb = 0.75 * Number(priorProb[i][j - 1]);
               // blocked, ignore it
             }
 
@@ -358,16 +358,16 @@ function motion(grid, priorProb, movingActn) {
             if (isValid(i - 1, j)) {
               // open square to the north, we can move right with 10% probability to the current cell
               if (isUnBlocked(grid, i - 1, j))
-                northTransitionProb = 0.1 * priorProb[i - 1][j];
+                northTransitionProb = 0.1 * Number(priorProb[i - 1][j]);
               // blocked square north, we can move from the current square left with 15% probability and bounce back
-              else northTransitionProb = 0.15 * priorProb[i][j];
-            } else northTransitionProb = 0.15 * priorProb[i][j];
+              else northTransitionProb = 0.15 * Number(priorProb[i][j]);
+            } else northTransitionProb = 0.15 * Number(priorProb[i][j]);
 
             // ---- EAST -----
             if (isValid(i, j + 1)) {
               // blocked square east, we can move straight with 75% probability and bounce back
               if (!isUnBlocked(grid, i, j + 1))
-                eastTransitionProb = 0.75 * priorProb[i][j];
+                eastTransitionProb = 0.75 * Number(priorProb[i][j]);
               // open square, ignore it
             }
 
@@ -375,12 +375,12 @@ function motion(grid, priorProb, movingActn) {
             if (isValid(i + 1, j)) {
               // open square south, we can move left from that square with 15% probability to the current square
               if (isUnBlocked(grid, i + 1, j))
-                southTransitionProb = 0.15 * priorProb[i + 1][j];
+                southTransitionProb = 0.15 * Number(priorProb[i + 1][j]);
               // blocked square south, we can move right from current square with 10% probability and bounce back
-              else southTransitionProb = 0.1 * priorProb[i][j];
+              else southTransitionProb = 0.1 * Number(priorProb[i][j]);
             }
             // not valid, acts as an obstacle
-            else southTransitionProb = 0.1 * priorProb[i][j];
+            else southTransitionProb = 0.1 * Number(priorProb[i][j]);
 
             break;
           case "S":
@@ -388,18 +388,18 @@ function motion(grid, priorProb, movingActn) {
             if (isValid(i, j - 1)) {
               // open square west, we can move left with 15% probability and end up in the current square
               if (isUnBlocked(grid, i, j - 1))
-                westTransitionProb = 0.15 * priorProb[i][j - 1];
+                westTransitionProb = 0.15 * Number(priorProb[i][j - 1]);
               // blocked square west, move right from current square with 10% probability and bounce back
-              else westTransitionProb = 0.1 * priorProb[i][j];
+              else westTransitionProb = 0.1 * Number(priorProb[i][j]);
             }
             // acts like a blocked square
-            else westTransitionProb = 0.1 * priorProb[i][j];
+            else westTransitionProb = 0.1 * Number(priorProb[i][j]);
 
             // ----- NORTH -----
             if (isValid(i - 1, j)) {
               // open square north, move straight with 75% probability to current square
               if (isUnBlocked(grid, i - 1, j))
-                northTransitionProb = 0.75 * priorProb[i - 1][j];
+                northTransitionProb = 0.75 * Number(priorProb[i - 1][j]);
               // blocked, ignore it
             }
 
@@ -407,18 +407,18 @@ function motion(grid, priorProb, movingActn) {
             if (isValid(i, j + 1)) {
               // open square east, move right from that square with 10% probability to current square
               if (isUnBlocked(grid, i, j + 1))
-                eastTransitionProb = 0.1 * priorProb[i][j + 1];
+                eastTransitionProb = 0.1 * Number(priorProb[i][j + 1]);
               // blocked square east, move left from current square with 15% probability and bounce back
-              else eastTransitionProb = 0.15 * priorProb[i][j];
+              else eastTransitionProb = 0.15 * Number(priorProb[i][j]);
             }
             // invalid east square, acts as an obstacle
-            else eastTransitionProb = 0.15 * priorProb[i][j];
+            else eastTransitionProb = 0.15 * Number(priorProb[i][j]);
 
             //  ---- SOUTH ----
             if (isValid(i + 1, j)) {
               // blocked square south, move straight with 75% probability and bounce back to current square
               if (!isUnBlocked(grid, i + 1, j))
-                southTransitionProb = 0.75 * priorProb[i][j];
+                southTransitionProb = 0.75 * Number(priorProb[i][j]);
               // open square, ignore it
             }
 
@@ -434,6 +434,10 @@ function motion(grid, priorProb, movingActn) {
       }
       // blocked square, we don't calculate its probability
       else posteriorMotionProbs[i][j] = "####";
+      westTransitionProb = 0;
+      northTransitionProb = 0;
+      eastTransitionProb = 0;
+      southTransitionProb = 0;
     }
   }
 
@@ -463,13 +467,38 @@ let initialProbs = [
   [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 ];
 
-// The robot is going to perform the following actions
+// Initial probabilities, sensing
 let posteriorSensProbs = sensing(grid, initialProbs, [0, 1, 0, 0]);
 
+console.log("------ Filtering after evidence [0,1,0,0] ------");
 printPosteriorProbs(posteriorSensProbs);
 
-// posteriorSensProbs are now the prior probabilities for this function
+// Motion probabilities for Action E after initial probabilities
 let posteriorMotionProbs = motion(grid, posteriorSensProbs, "E");
 
-console.log("-------- Motion --------\n");
+console.log("\n-------- Prediction after Action E --------");
 printPosteriorProbs(posteriorMotionProbs);
+
+const evidenceList = [
+  [0, 0, 0, 0],
+  [1, 0, 0, 1],
+  [0, 0, 1, 0],
+  [0, 1, 0, 1],
+];
+
+const action = ["N", "N", "W"];
+
+for (let i = 0; i < evidenceList.length; i++) {
+  console.log(
+    `\n------- Filtering after Evidence [${evidenceList[i]}] -------`
+  );
+  posteriorSensProbs = sensing(grid, posteriorMotionProbs, evidenceList[i]);
+
+  printPosteriorProbs(posteriorSensProbs);
+
+  if (i < action.length) {
+    console.log(`\n------- Prediction after Action ${action[i]} --------`);
+    posteriorMotionProbs = motion(grid, posteriorSensProbs, action[i]);
+    printPosteriorProbs(posteriorMotionProbs);
+  }
+}
